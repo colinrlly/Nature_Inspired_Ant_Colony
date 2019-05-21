@@ -5,23 +5,23 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Main {
-
-  Random r = new Random();
   
   public static void main(String[] args) {
+    Random r = new Random();
+
     // Test variables
     int numAnts = 4; // Number of ants
     int numCities = 5; // Number of city nodes
-    float pheromones[][] = float[numCities][numCities]; // Pheromone chart
-    int distances[][] = int[numCities][numCities]; // Distance chart
-    float evaporation = 0.9; // Evaporation constant
-    float intensification = 0.1; // Intensficiation constant
-    float pheromoneWeight = 1; // Weight of pheromones for pathfinding
-    float heuristicWeight = 0; // Weight of heuristic for pathfinding
-    float greedy = 0; // Greedy parameter
+    float pheromones[][] = new float[numCities][numCities]; // Pheromone chart
+    int distances[][] = new int[numCities][numCities]; // Distance chart
+    float evaporation = 0.9f; // Evaporation constant
+    float intensification = 0.1f; // Intensficiation constant
+    float pheromoneWeight = 1f; // Weight of pheromones for pathfinding
+    float heuristicWeight = 0f; // Weight of heuristic for pathfinding
+    float greedy = 0f; // Greedy parameter
     int terminationCount = 3; // How many times we loop
 
-    ArrayList<Integer> bestSolution; // Save the best solution
+    ArrayList<Integer> bestSolution = new ArrayList<>(); // Save the best solution
 
     // Populate pheromone and distances with dummy data
     for (int i = 0; i < numCities; ++i) {
@@ -46,15 +46,15 @@ public class Main {
 
         for (int city = 0; city < numCities; ++city) {
           cities.remove(city);
-          float probabilities[] = float[cities.length()];
-          for (int destination = 0; destination < cities.length(); ++destination) {
+          float probabilities[] = new float[cities.size()];
+          for (int destination = 0; destination < cities.size(); ++destination) {
             if (destination == 0) {
-              probabilities[destination] = pheromones[city][cities.get(destination)] / cities.length();
+              probabilities[destination] = pheromones[city][cities.get(destination)] / cities.size();
             } else {
-              probabilities[destination] = probabilities[destination - 1] + pheromones[city][cities.get(destination)] / cities.length();
+              probabilities[destination] = probabilities[destination - 1] + pheromones[city][cities.get(destination)] / cities.size();
             }
             float selection = r.nextFloat();
-            for (int i = 0; i < probabilities.length(); ++i) {
+            for (int i = 0; i < probabilities.length; ++i) {
               if (selection <= probabilities[i]) {
                 solution.add(cities.get(i));
                 break;
@@ -65,13 +65,13 @@ public class Main {
         solutions.add(solution);
       }
 
-      if (bestSolution == null) {
+      if (bestSolution.size() == 0) {
         bestSolution = solutions.get(0);
       }
       int bestDistance = getDistance(bestSolution, distances);
 
       for (ArrayList<Integer> potentialSolution : solutions) {
-        potentialDistance = getDistance(potentialSolution, distances);
+        int potentialDistance = getDistance(potentialSolution, distances);
         if (potentialDistance < bestDistance) {
           bestSolution = potentialSolution;
           bestDistance = potentialDistance;
@@ -93,7 +93,7 @@ public class Main {
     }
   }
 
-  public int getDistance(ArrayList<Integer> solution, int[][] distances) {
+  public static int getDistance(ArrayList<Integer> solution, int[][] distances) {
     int distance = 0;
     int start = 0;
     for (int city : solution) {
