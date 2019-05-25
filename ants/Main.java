@@ -1,105 +1,26 @@
 package ants;
 
-import java.lang.Math;
-import java.util.ArrayList;
-import java.util.Random;
-
 public class Main {
-  
-  public static void main(String[] args) {
-    Random r = new Random();
+    private static int num_ants = 10;
+    private static int num_cities = 10;
+    private static float evaporation_param = .1f;
+    private static float intesification_param = .1f;
+    private static int pheromone_weight = 2;
+    private static int heuristic_weight = 2;
+    private static int greedy_param = 2;
 
-    // Test variables
-    int numAnts = 4; // Number of ants
-    int numCities = 5; // Number of city nodes
-    float pheromones[][] = new float[numCities][numCities]; // Pheromone chart
-    int distances[][] = new int[numCities][numCities]; // Distance chart
-    float evaporation = 0.9f; // Evaporation constant
-    float intensification = 0.1f; // Intensficiation constant
-    float pheromoneWeight = 1f; // Weight of pheromones for pathfinding
-    float heuristicWeight = 0f; // Weight of heuristic for pathfinding
-    float greedy = 0f; // Greedy parameter
-    int terminationCount = 3; // How many times we loop
+    public static void main(String[] args) {
+        Problem problem = new Problem(
+            num_ants,
+            num_cities,
+            evaporation_param,
+            intesification_param,
+            pheromone_weight,
+            heuristic_weight,
+            greedy_param);
 
-    ArrayList<Integer> bestSolution = new ArrayList<>(); // Save the best solution
+        PheromoneMatrix pheromones = new PheromoneMatrix(problem);
 
-    // Populate pheromone and distances with dummy data
-    for (int i = 0; i < numCities; ++i) {
-      for (int j = 0; j < numCities; ++j) {
-        if (i != j) {
-          pheromones[i][j] = 1;
-        }
-        distances[i][j] = Math.abs(i - j); // TODO: More varied assignment
-      }
+        System.out.println(pheromones);
     }
-    
-    for (int loop = 0; loop < terminationCount; ++loop) {
-      ArrayList<ArrayList<Integer>> solutions = new ArrayList<>();
-
-      // Mock up of a pathfinder
-      for (int ant = 0; ant < numAnts; ++ant) {
-        ArrayList<Integer> solution = new ArrayList<>();
-        ArrayList<Integer> cities = new ArrayList<>();
-        for (int i = 0; i < numCities; ++i) {
-          cities.add(i);
-        }
-
-        for (int city = 0; city < numCities; ++city) {
-          cities.remove(city);
-          float probabilities[] = new float[cities.size()];
-          for (int destination = 0; destination < cities.size(); ++destination) {
-            if (destination == 0) {
-              probabilities[destination] = pheromones[city][cities.get(destination)] / cities.size();
-            } else {
-              probabilities[destination] = probabilities[destination - 1] + pheromones[city][cities.get(destination)] / cities.size();
-            }
-            float selection = r.nextFloat();
-            for (int i = 0; i < probabilities.length; ++i) {
-              if (selection <= probabilities[i]) {
-                solution.add(cities.get(i));
-                break;
-              }
-            }
-          }
-        }
-        solutions.add(solution);
-      }
-
-      if (bestSolution.size() == 0) {
-        bestSolution = solutions.get(0);
-      }
-      int bestDistance = getDistance(bestSolution, distances);
-
-      for (ArrayList<Integer> potentialSolution : solutions) {
-        int potentialDistance = getDistance(potentialSolution, distances);
-        if (potentialDistance < bestDistance) {
-          bestSolution = potentialSolution;
-          bestDistance = potentialDistance;
-        }
-      }
-
-      for (int i = 0; i < numCities; ++i) {
-        for (int j = 0; j < numCities; ++j) {
-          pheromones[i][j] *= evaporation;
-        }
-      }
-
-      int start = 0;
-      for (int city : bestSolution) {
-        pheromones[start][city] += intensification;
-        pheromones[city][start] += intensification;
-        start = city;
-      }
-    }
-  }
-
-  public static int getDistance(ArrayList<Integer> solution, int[][] distances) {
-    int distance = 0;
-    int start = 0;
-    for (int city : solution) {
-      distance += distances[start][city];
-      start = city;
-    }
-    return distance;
-  }
 }
