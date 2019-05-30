@@ -1,5 +1,5 @@
 package ants;
 
 public interface Intensifier {
-    public boolean Intensify(Problem p, boolean population, boolean pheramone_matrix);
+    public void Intensify(Problem p, int[][] solutions, PheromoneMatrix pheromone_matrix);
 }
