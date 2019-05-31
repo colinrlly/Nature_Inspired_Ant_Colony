@@ -31,8 +31,7 @@ public class Problem {
         }
 
     /****** ACCESSORS ******/
-    public int get_num_cities()
-    {
+    public int get_num_cities() {
         return this.num_cities;
     }
 
