@@ -2,5 +2,5 @@ package ants;
 
 public interface Initializer {
 
-    public boolean initializePopulation(Problem problem, PheromoneMatrix pheromone_matrix);
+    public void initializePopulation(Problem problem, PheromoneMatrix pheromone_matrix, int starting_value);
 }
