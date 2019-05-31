@@ -65,6 +65,22 @@ public class Problem {
     public int get_num_cities() {
         return this.num_cities;
     }
+    
+    public int get_num_ants() {
+        return this.num_ants;
+    }
+
+    public float get_pheromone_weight() {
+        return this.pheromone_weight;
+    }
+
+    public float get_heuristic_weight() {
+        return this.heuristic_weight;
+    }
+
+    public int get_distance(int i, int j) {
+        return distance_matrix[i][j];
+    }
 
     /******* TO STRING *******/
     public String toString() {

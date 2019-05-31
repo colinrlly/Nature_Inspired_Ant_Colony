@@ -3,10 +3,18 @@ package ants;
 import java.util.Arrays;
 
 public class PheromoneMatrix {
-    private int[][] m;
+    private float[][] m;
 
     public PheromoneMatrix(Problem problem) {
-        this.m = new int[problem.get_num_cities()][problem.get_num_cities()];
+        this.m = new float[problem.get_num_cities()][problem.get_num_cities()];
+    }
+    
+    public float getVal(int i, int j) {
+      return m[i][j];
+    }
+
+    public void setVal(int i, int j, float val) {
+      m[i][j] = val;
     }
 
     /****** TO STRING ******/
