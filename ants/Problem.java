@@ -15,7 +15,7 @@ public class Problem {
     private int greedy_param;
     private float evaporation_param;
     private float intesification_param;
-    private int[] data;
+    private int[][] data;
 
     public Problem(
         int num_ants,
@@ -42,26 +42,30 @@ public class Problem {
     /***
      * Load an array representing the data held in a tsp file.
      * 
-     * @param data_path - Path of the csv file to load data from.
+     * @param data_path - Path of the tsp file to load data from.
      */
     private void parseCSV(String path) {
-        List<Integer> records = new ArrayList<>();
+        this.data = new int[this.num_cities][this.num_cities];
+        int[] record;
 
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
+            String[] split_line;
+            int j = 0;
 
             while ((line = br.readLine()) != null) {
-                System.out.println(line);
-                // records.add(Integer.parseInt(line));
+                split_line = line.split(" ");
+                record = new int[this.num_cities];
+
+                for (int i = 0; i < split_line.length; i++) {
+                    record[i] = Integer.parseInt(split_line[i]);
+                }
+
+                this.data[j] = record;
+                j++;
             }
         } catch (IOException e) {
             throw new java.lang.RuntimeException(e);
-        }
-
-        // Convert array list of Integer objects to array of int.
-        this.data = new int[records.size()];
-        for (int i=0; i < this.data.length; i++) {
-            this.data[i] = records.get(i).intValue();
         }
     }
 
