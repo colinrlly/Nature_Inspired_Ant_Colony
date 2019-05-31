@@ -21,6 +21,15 @@ public class Main {
             intesification_param,
             data_path);
 
-        PheromoneMatrix pheromones = new PheromoneMatrix(problem);        
+        PheromoneMatrix pheromones = new PheromoneMatrix(problem);
+        Initializer initializer = new Initializer(problem, pheromones);
+        SolutionGenerator solutionGenerator = new SolutionGenerator(problem, pheromones);
+        Evaporator evaporator = new Evaporator(problem, pheromones);
+        Intensifier intensifier = new Intensifier(problem, pheromones);
     }
 }
+
+// Initialization (N)
+// Solution Generation (α, β, q)
+// Evaporation (ρ)
+// Intensification (∆)

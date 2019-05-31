@@ -2,5 +2,5 @@ package ants;
 
 public interface SolutionGenerator {
 
-    public boolean generateSolution(Problem p, boolean population, int pop_size);
+    public boolean generateSolution(Problem problem, PheromoneMatrix pheromones);
 }

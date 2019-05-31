@@ -2,5 +2,5 @@ package ants;
 
 public interface Evaporator {
 
-    public boolean evaporate(Problem p, boolean pheramone_matrix);
+    public boolean evaporate(Problem problem, PheromoneMatrix pheramone_matrix);
 }
