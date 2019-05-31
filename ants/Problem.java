@@ -15,37 +15,29 @@ public class Problem {
     private int greedy_param;
     private float evaporation_param;
     private float intesification_param;
-    private int[][] data;
+    private int[][] distance_matrix;
 
-    public Problem(
-        int num_ants,
-        int num_cities,
-        int pheromone_weight,
-        int heuristic_weight,
-        int greedy_param,
-        float evaporation_param,
-        float intesification_param,
-        String data_path) {
+    public Problem(int num_ants, int num_cities, int pheromone_weight, int heuristic_weight, int greedy_param,
+            float evaporation_param, float intesification_param, String data_path) {
 
-            this.num_ants = num_ants;
-            this.num_cities = num_cities;
-            this.pheromone_weight = pheromone_weight;
-            this.heuristic_weight = heuristic_weight;
-            this.greedy_param = greedy_param;
-            this.evaporation_param = evaporation_param;
-            this.intesification_param = intesification_param;
+        this.num_ants = num_ants;
+        this.num_cities = num_cities;
+        this.pheromone_weight = pheromone_weight;
+        this.heuristic_weight = heuristic_weight;
+        this.greedy_param = greedy_param;
+        this.evaporation_param = evaporation_param;
+        this.intesification_param = intesification_param;
 
-            this.parseCSV(data_path);
-        }
+        this.parseCSV(data_path);
+    }
 
-        
     /***
      * Load an array representing the data held in a tsp file.
      * 
      * @param data_path - Path of the tsp file to load data from.
      */
     private void parseCSV(String path) {
-        this.data = new int[this.num_cities][this.num_cities];
+        this.distance_matrix = new int[this.num_cities][this.num_cities];
         int[] record;
 
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
@@ -61,7 +53,7 @@ public class Problem {
                     record[i] = Integer.parseInt(split_line[i]);
                 }
 
-                this.data[j] = record;
+                this.distance_matrix[j] = record;
                 j++;
             }
         } catch (IOException e) {

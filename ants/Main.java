@@ -21,9 +21,6 @@ public class Main {
             intesification_param,
             data_path);
 
-        PheromoneMatrix pheromones = new PheromoneMatrix(problem);
-
-        DistanceMatrix distanceM = new DistanceMatrix(problem);
-        
+        PheromoneMatrix pheromones = new PheromoneMatrix(problem);        
     }
 }
