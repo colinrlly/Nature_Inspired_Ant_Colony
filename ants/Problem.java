@@ -12,8 +12,8 @@ public class Problem {
 
     private int num_ants;
     private int num_cities;
-    private int pheromone_weight;
-    private int heuristic_weight;
+    private double pheromone_weight;
+    private double heuristic_weight;
     private int greedy_param;
     private float evaporation_param;
     private float intesification_param;
@@ -21,7 +21,7 @@ public class Problem {
 
 
 
-    public Problem(int num_ants, int num_cities, int pheromone_weight, int heuristic_weight, int greedy_param,
+    public Problem(int num_ants, int num_cities, double pheromone_weight, double heuristic_weight, int greedy_param,
             float evaporation_param, float intesification_param, String data_path) {
 
         this.num_ants = num_ants;
@@ -125,6 +125,22 @@ public class Problem {
     public int[][] getDistance_matrix() {
         return distance_matrix;
     }
+
+
+    public double getPheromone_weight() {
+        return pheromone_weight;
+    }
+
+    public double getHeuristic_weight() {
+        return heuristic_weight;
+    }
+
+    public int getGreedy_param() {
+        return greedy_param;
+    }
+
+
+
 
 
 

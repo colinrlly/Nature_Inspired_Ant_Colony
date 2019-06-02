@@ -3,8 +3,8 @@ package ants;
 public class Main {
     private static int num_ants = 100;
     private static int num_cities = 150;
-    private static int pheromone_weight = 2;
-    private static int heuristic_weight = 2;
+    private static double pheromone_weight = 0.5;
+    private static double heuristic_weight = 1;
     private static int greedy_param = 2;
     private static float evaporation_param = .9f;
     private static float intesification_param = .1f;
@@ -64,6 +64,7 @@ public class Main {
                 int[][] solutions = solutionGenerator.generateSolutions(problem, pheromones);
                 evaporator.evaporate(problem, pheromones);
                 bestDistance = intensifier.Intensify(problem, solutions, pheromones);
+                //System.out.println(bestDistance);
 
                 /*
                 //termination condition checking

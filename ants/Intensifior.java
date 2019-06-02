@@ -17,6 +17,7 @@ public class Intensifior implements Intensifier{
             }
         }
 
+
         float[][] pheromones = pheromone_matrix.getM();
         int start = 0;
         for (int city : bestSolution) {
