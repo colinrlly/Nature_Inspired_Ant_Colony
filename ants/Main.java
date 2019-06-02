@@ -39,7 +39,9 @@ public class Main {
         */
 
 
+        long start = System.nanoTime();
         runIteration(problem,numRuns);
+        System.out.println((System.nanoTime()-start)/1000000000.0);
 
 
     }

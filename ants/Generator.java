@@ -27,17 +27,31 @@ public class Generator implements SolutionGenerator{
                 double probabilities[] = new double[cities.size()];
                 float totalPher = 0f;
                 int p = previous;
+                /*
                 for (int c: cities){
                     totalPher += Math.pow(pheromones[previous][c], problem.getPheromone_weight()) / Math.pow(distances[previous][c], problem.getHeuristic_weight());
                 }
+                */
 
                 float prob = 0;
                 for (int destination = 0; destination < cities.size(); ++destination) {
+                    double numerator = Math.pow(pheromones[previous][cities.get(destination)], problem.getPheromone_weight());
+                    double denom = Math.pow(distances[previous][cities.get(destination)], problem.getHeuristic_weight());
+                    probabilities[destination] = numerator/denom;
+                    totalPher += probabilities[destination];
+                    /*
                     if (destination == 0) {
-                        probabilities[destination] = Math.pow(pheromones[previous][cities.get(destination)], problem.getPheromone_weight()) / (totalPher * Math.pow(distances[previous][cities.get(destination)], problem.getHeuristic_weight()));
+                        probabilities[destination] = Math.pow(pheromones[previous][cities.get(destination)], problem.getPheromone_weight()) /
+                         (totalPher * Math.pow(distances[previous][cities.get(destination)], problem.getHeuristic_weight()));
                     } else {
-                        probabilities[destination] = probabilities[destination - 1] + (Math.pow(pheromones[previous][cities.get(destination)], problem.getPheromone_weight()) / (totalPher * Math.pow(distances[previous][cities.get(destination)], problem.getHeuristic_weight())));
-                    }
+                        probabilities[destination] = probabilities[destination - 1] + (Math.pow(pheromones[previous][cities.get(destination)], problem.getPheromone_weight()) /
+                         (totalPher * Math.pow(distances[previous][cities.get(destination)], problem.getHeuristic_weight())));
+                    }*/
+                }
+                probabilities[0] /= totalPher;
+                for (int x = 1; x < probabilities.length; x++){
+                    probabilities[x] /= totalPher;
+                    probabilities[x] += probabilities[x-1];
                 }
                 //System.out.println(probabilities[probabilities.length-1]);
 
