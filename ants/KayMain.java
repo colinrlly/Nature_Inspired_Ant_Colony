@@ -7,6 +7,7 @@ import java.util.Random;
 public class KayMain {
   
   public static void main(String[] args) {
+    /*
     Random r = new Random();
 
     // Test variables
@@ -91,15 +92,8 @@ public class KayMain {
         start = city;
       }
     }
+    */
   }
 
-  public static int getDistance(ArrayList<Integer> solution, int[][] distances) {
-    int distance = 0;
-    int start = 0;
-    for (int city : solution) {
-      distance += distances[start][city];
-      start = city;
-    }
-    return distance;
-  }
+
 }
