@@ -8,16 +8,20 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Problem {
+
+
     private int num_ants;
     private int num_cities;
-    private int pheromone_weight;
-    private int heuristic_weight;
+    private double pheromone_weight;
+    private double heuristic_weight;
     private int greedy_param;
     private float evaporation_param;
     private float intesification_param;
     private int[][] distance_matrix;
 
-    public Problem(int num_ants, int num_cities, int pheromone_weight, int heuristic_weight, int greedy_param,
+
+
+    public Problem(int num_ants, int num_cities, double pheromone_weight, double heuristic_weight, int greedy_param,
             float evaporation_param, float intesification_param, String data_path) {
 
         this.num_ants = num_ants;
@@ -81,4 +85,63 @@ public class Problem {
 
         return s;
     }
+
+
+    public void setPheromone_weight(int pheromone_weight) {
+        this.pheromone_weight = pheromone_weight;
+    }
+
+    public void setHeuristic_weight(int heuristic_weight) {
+        this.heuristic_weight = heuristic_weight;
+    }
+
+    public void setGreedy_param(int greedy_param) {
+        this.greedy_param = greedy_param;
+    }
+
+    public void setEvaporation_param(float evaporation_param) {
+        this.evaporation_param = evaporation_param;
+    }
+
+    public void setIntesification_param(float intesification_param) {
+        this.intesification_param = intesification_param;
+    }
+    public int getNum_ants() {
+        return num_ants;
+    }
+
+    public int getNum_cities() {
+        return num_cities;
+    }
+
+    public float getEvaporation_param() {
+        return evaporation_param;
+    }
+
+    public float getIntesification_param() {
+        return intesification_param;
+    }
+
+    public int[][] getDistance_matrix() {
+        return distance_matrix;
+    }
+
+
+    public double getPheromone_weight() {
+        return pheromone_weight;
+    }
+
+    public double getHeuristic_weight() {
+        return heuristic_weight;
+    }
+
+    public int getGreedy_param() {
+        return greedy_param;
+    }
+
+
+
+
+
+
 }
