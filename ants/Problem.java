@@ -10,18 +10,22 @@ import java.util.List;
 public class Problem {
 
 
+    public void setNum_ants(int num_ants) {
+        this.num_ants = num_ants;
+    }
+
     private int num_ants;
     private int num_cities;
     private double pheromone_weight;
     private double heuristic_weight;
-    private int greedy_param;
+    private double greedy_param;
     private float evaporation_param;
     private float intesification_param;
     private int[][] distance_matrix;
 
 
 
-    public Problem(int num_ants, int num_cities, double pheromone_weight, double heuristic_weight, int greedy_param,
+    public Problem(int num_ants, int num_cities, double pheromone_weight, double heuristic_weight, double greedy_param,
             float evaporation_param, float intesification_param, String data_path) {
 
         this.num_ants = num_ants;
@@ -87,15 +91,15 @@ public class Problem {
     }
 
 
-    public void setPheromone_weight(int pheromone_weight) {
+    public void setPheromone_weight(double pheromone_weight) {
         this.pheromone_weight = pheromone_weight;
     }
 
-    public void setHeuristic_weight(int heuristic_weight) {
+    public void setHeuristic_weight(double heuristic_weight) {
         this.heuristic_weight = heuristic_weight;
     }
 
-    public void setGreedy_param(int greedy_param) {
+    public void setGreedy_param(double greedy_param) {
         this.greedy_param = greedy_param;
     }
 
@@ -135,7 +139,7 @@ public class Problem {
         return heuristic_weight;
     }
 
-    public int getGreedy_param() {
+    public double getGreedy_param() {
         return greedy_param;
     }
 
