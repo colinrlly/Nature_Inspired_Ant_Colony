@@ -4,10 +4,10 @@ public class Main {
     private static int num_ants = 200;
     private static int num_cities = 150;
     private static double pheromone_weight = 1;
-    private static double heuristic_weight = 1;
+    private static double heuristic_weight = 0;
     private static double greedy_param = 0f;
-    private static float evaporation_param = .9f;
-    private static float intesification_param = .05f;
+    private static float evaporation_param = .93f;
+    private static float intesification_param = .005f;
     private static String data_path = "data/03maximum.tsp";
 
 
@@ -49,8 +49,13 @@ public class Main {
         //problem.setHeuristic_weight(4);
         //
 
-        for (int x = 0; x < 8   ; x++) {
-            runIteration(problem, numRuns);
+        for (int x = 0; x < 9   ; x++) {
+            problem.setIntesification_param(0.05f);
+            for (int y = 0; y < 8; y++) {
+                runIteration(problem, numRuns);
+                problem.setIntesification_param(problem.getIntesification_param() + 0.025f);
+            }
+            problem.setEvaporation_param(problem.getEvaporation_param()+0.012f);
             //if (problem.getHeuristic_weight() < 2.1)
             //problem.setGreedy_param(problem.getGreedy_param()+0.1f);
            // else
@@ -101,7 +106,7 @@ public class Main {
             boolean termination = false;
             int count = 0;
             int bestDistance = 0;
-            int maxCount = 15;
+            int maxCount = 75;
             int previousDistance = 0;
             initializer.initializePopulation(problem, pheromones, 1f);
             do {
