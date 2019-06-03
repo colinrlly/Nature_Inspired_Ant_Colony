@@ -48,22 +48,38 @@ public class Generator implements SolutionGenerator{
                          (totalPher * Math.pow(distances[previous][cities.get(destination)], problem.getHeuristic_weight())));
                     }*/
                 }
-                probabilities[0] /= totalPher;
-                for (int x = 1; x < probabilities.length; x++){
-                    probabilities[x] /= totalPher;
-                    probabilities[x] += probabilities[x-1];
-                }
-                //System.out.println(probabilities[probabilities.length-1]);
-
-                float selection = r.nextFloat();
-                for (int i = 0; i < probabilities.length; ++i) {
-                    if (selection <= probabilities[i]) {
-                        solution.add(cities.get(i));
-                        previous = cities.get(i);
-                        cities.remove(i);
-                        break;
+                if(r.nextFloat() <= problem.getGreedy_param()){
+                    int bestC = 0;
+                    double best = probabilities[0];
+                    for (int x = 1; x < probabilities.length; x++){
+                        if(probabilities[x] > best){
+                            best = probabilities[x];
+                            bestC = x;
+                        }
                     }
+                    solution.add(cities.get(bestC));
+                    previous = cities.get(bestC);
+                    cities.remove(bestC);
+                } else {
 
+
+                    probabilities[0] /= totalPher;
+                    for (int x = 1; x < probabilities.length; x++) {
+                        probabilities[x] /= totalPher;
+                        probabilities[x] += probabilities[x - 1];
+                    }
+                    //System.out.println(probabilities[probabilities.length-1]);
+
+                    float selection = r.nextFloat();
+                    for (int i = 0; i < probabilities.length; ++i) {
+                        if (selection <= probabilities[i]) {
+                            solution.add(cities.get(i));
+                            previous = cities.get(i);
+                            cities.remove(i);
+                            break;
+                        }
+
+                    }
                 }
             }
             solutions.add(solution);
